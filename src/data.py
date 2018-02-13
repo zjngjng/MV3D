@@ -601,7 +601,7 @@ def data_in_single_driver(raw_dir, date, drive, frames_index=None):
         # dataset.load_timestamps()    # Timestamps are parsed into datetime objects
         # dataset.load_oxts()          # OXTS packets are loaded as named tuples
         # dataset.load_gray()         # Left/right images are accessible as named tuples
-        dataset.load_left_rgb()
+        dataset.load_left_rgb(format='cv2')
         dataset.load_velo()          # Each scan is a Nx4 array of [x,y,z,reflectance]
 
 
@@ -609,7 +609,7 @@ def data_in_single_driver(raw_dir, date, drive, frames_index=None):
         save_preprocess_dir = cfg.PREPROCESSING_DATA_SETS_DIR
 
         if 1:  ## rgb images --------------------
-            proprecess_rgb(save_preprocess_dir, dataset, date, drive, frames_index, overwrite=False)
+            proprecess_rgb(save_preprocess_dir, dataset, date, drive, frames_index, overwrite=True)
 
 
         if 1:  ##generate top view --------------------
@@ -760,10 +760,11 @@ if __name__ == '__main__':
 
         frames_index=None  #None
     elif cfg.DATA_SETS_TYPE == 'kitti':
-        data_dir = {'2011_09_26': ['0001', '0017', '0029', '0052', '0070', '0002', '0018', '0035', '0056', '0079',
+        ''' data_dir = {'2011_09_26': ['0001', '0017', '0029', '0052', '0070', '0002', '0018', '0035', '0056', '0079',
                                    '0019', '0036', '0005', '0057', '0084', '0020', '0039', '0059', '0086', '0011',
                                    '0023', '0046', '0060', '0091','0013', '0027', '0048', '0061', '0015', '0028',
-                                   '0051', '0064']}
+                                   '0051', '0064']}'''
+        data_dir = {'2011_09_26': ['0005']}
 
         frames_index = None # [0,5,8,12,16,20,50]
     elif cfg.DATA_SETS_TYPE == 'test':
